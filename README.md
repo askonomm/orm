@@ -6,7 +6,7 @@ A object relational mapper with a query builder and out of box support for MySQL
 
 ## Installation
 
-```php
+```
 composer require asko/orm
 ```
 
