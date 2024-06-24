@@ -54,7 +54,9 @@ class User extends Model
 }
 ```
 
-And woalaa, you have an ORM mapping data classes to tables in the database all with full type support.
+And woalaa, you have an ORM mapping data classes to tables in the database all with full type support (works especially well with PHPStan).
+
+Note that the `$_identifier` should match the name of the primary key, which in the above case is `id`, and the `$_table` should match the name of the database table, naturally. All other properties should represent the columns of the table and should all be `null` by default, these will then be populated by the ORM automatically when querying data.
 
 ## Querying
 
