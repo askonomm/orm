@@ -1,0 +1,34 @@
+{
+  "name": "asko/orm",
+  "description": "",
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Asko\\Orm\\": "src/"
+    },
+    "classmap": [
+      "src/"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Asko\\Orm\\Tests\\": "tests/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Asko Nõmm",
+      "email": "asko@nth.ee"
+    }
+  ],
+  "require": {
+    "php": ">=8.2",
+    "crell/fp": "^1.0",
+    "asko/collection": "^1.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^11",
+    "phpstan/phpstan": "^1.11"
+  }
+}
