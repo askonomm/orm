@@ -46,7 +46,12 @@ class BaseModel
   public function get(string $key = null, $default = null): mixed
   {
     if (is_null($key) && is_null($default)) {
-      return $this;
+      $vars = get_object_vars($this);
+      unset($vars['_connection']);
+      unset($vars['_table']);
+      unset($vars['_identifier']);
+
+      return $vars;
     }
 
     return $this->{$key} ?? $default;
