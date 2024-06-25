@@ -62,9 +62,9 @@ class BaseModel
    * 
    * @param string $key 
    * @param mixed $value 
-   * @return BaseModel<T>
+   * @return static
    */
-  public function set(string $key, mixed $value): self
+  public function set(string $key, mixed $value): static
   {
     $this->{$key} = $value;
 
@@ -84,9 +84,9 @@ class BaseModel
 
   /**
    * @param mixed $identifier
-   * @return ?BaseModel<T>
+   * @return static|null
    */
-  public function find(mixed $identifier): ?self
+  public function find(mixed $identifier): ?static
   {
     return self::query()
       ->select('*')
