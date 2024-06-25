@@ -2,6 +2,8 @@
 
 namespace Asko\Orm;
 
+use ReflectionProperty;
+
 /**
  * @template T
  */
@@ -47,11 +49,21 @@ class BaseModel
   {
     if (is_null($key) && is_null($default)) {
       $vars = get_object_vars($this);
-      unset($vars['_connection']);
-      unset($vars['_table']);
-      unset($vars['_identifier']);
+      $column_vars = [];
 
-      return $vars;
+      // Keep only vars that have the Column attribute
+      foreach ($vars as $k => $v) {
+        $reflection = new ReflectionProperty($this, $k);
+        $attributes = $reflection->getAttributes();
+
+        foreach ($attributes as $attribute) {
+          if ($attribute->getName() === Column::class) {
+            $column_vars[$k] = $v;
+          }
+        }
+      }
+
+      return $column_vars;
     }
 
     return $this->{$key} ?? $default;

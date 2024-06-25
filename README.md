@@ -40,6 +40,8 @@ class Model extends BaseModel
 And then you can create all your data models like this:
 
 ```php
+use Asko\Orm\Column;
+
 /**
  * @extends Model<User>
  */
@@ -48,15 +50,20 @@ class User extends Model
   protected static string $_table = "users";
   protected static string $_identifier = "id";
 
+  #[Column]
   public int $id;
+
+  #[Column]
   public string $name;
+
+  #[Column]
   public string $email;
 }
 ```
 
 And woalaa, you have an ORM mapping data classes to tables in the database all with full type support (works especially well with PHPStan).
 
-Note that the `$_identifier` should match the name of the primary key column, which in the above case is `id`, and the `$_table` should match the name of the database table, naturally. All other properties should represent the columns of the table (and also be nullable if the columns are nullable), these will be populated by the ORM automatically when querying data.
+Note that the `$_identifier` should match the name of the primary key column, which in the above case is `id`, and the `$_table` should match the name of the database table, naturally. The other properties here represent the columns of the table, these will be populated by the ORM automatically when querying data and have to have the `Column` attribute.
 
 ## Querying
 
