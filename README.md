@@ -248,12 +248,34 @@ Usage:
 
 ## Creating
 
-To be written.
+To create a new record in the database, you can do the following:
+
+```php
+$user = new User;
+$user->name = "John Smith";
+$user->email = "john@smith.com"
+$user->store();
+```
 
 ## Updating
 
-To be written.
+To update a record in the database, you can do the following:
+
+```php
+$user = (new User)->find(1);
+$user->name = "John Doe";
+$user->store();
+```
 
 ## Deleting
 
-To be written.
+To delete a record in the database, you can do the following:
+
+```php
+$user = (new User)->find(1);
+$user->delete();
+```
+
+## Creating a connection driver
+
+ORM comes with the MySQL driver already built in, but if you wish to extend the ORM to support other databases, you can do so by creating a new driver class that implements the `ConnectionDriver` interface, and if you need to also build a new query builder due to syntax differences with the MySQL query builder, you can do so by creating a new query builder class that implements the `QueryBuilder` interface.
