@@ -56,8 +56,204 @@ class User extends Model
 
 And woalaa, you have an ORM mapping data classes to tables in the database all with full type support (works especially well with PHPStan).
 
-Note that the `$_identifier` should match the name of the primary key, which in the above case is `id`, and the `$_table` should match the name of the database table, naturally. All other properties should represent the columns of the table, these will be populated by the ORM automatically when querying data.
+Note that the `$_identifier` should match the name of the primary key column, which in the above case is `id`, and the `$_table` should match the name of the database table, naturally. All other properties should represent the columns of the table, these will be populated by the ORM automatically when querying data.
 
 ## Querying
+
+You can query for data using the numerous query builder methods built into ORM.
+
+An example query looks like this:
+
+```php
+$user = (new User)
+  ->query()
+  ->select('*')
+  ->where('id', '=', 1)
+  ->first();
+```
+
+Although because we use the primary key identifier to search for the user, the above could be simplified as:
+
+```php
+$user = (new User)->find(1);
+```
+
+### All methods
+
+#### `select`
+
+Select the columns you want to retrieve from the table.
+
+Usage:
+
+```php
+(new User)->select('*');
+// or
+(new User)->select(['id', 'email']);
+```
+
+Note that every query must start with the `select` method.
+
+#### `where`
+
+Where clause to filter the results.
+
+Usage:
+
+```php
+(new User)->select('*')->where('id', '=', 1);
+// or
+(new User)->select('*')->where('id', '>', 1);
+```
+
+#### `andWhere`
+
+Same as `where` but with `AND` operator.
+
+Usage:
+
+```php
+(new User)->select('*')->where('id', '=', 1)->andWhere('email', '=', 'john@smith.com');
+```
+
+#### `orWhere`
+
+Same as `where` but with `OR` operator.
+
+Usage:
+
+```php
+(new User)->select('*')->where('id', '=', 1)->orWhere('email', '=', 'john@smith.com');
+```
+
+#### `orderBy`
+
+Order the results by a column.
+
+Usage:
+
+```php
+(new User)->select('*')->orderBy('id', 'asc');
+```
+
+#### `limit`
+
+Limit the number of results.
+
+Usage:
+
+```php
+(new User)->select('*')->limit(10);
+```
+
+#### `offset`
+
+Offset the results.
+
+Usage:
+
+```php
+(new User)->select('*')->offset(10);
+```
+
+#### `join`
+
+Join another table.
+
+Usage:
+
+```php
+(new User)->select('*')->join(SomeModel::class, 'users.id', '=', 'posts.user_id');
+```
+
+#### `leftJoin`
+
+Join another table with a left join.
+
+Usage:
+
+```php
+(new User)->select('*')->leftJoin(SomeModel::class, 'users.id', '=', 'posts.user_id');
+```
+
+#### `rightJoin`
+
+Join another table with a right join.
+
+Usage:
+
+```php
+(new User)->select('*')->rightJoin(SomeModel::class, 'users.id', '=', 'posts.user_id');
+```
+
+#### `innerJoin`
+
+Join another table with an inner join.
+
+Usage:
+
+```php
+(new User)->select('*')->innerJoin(SomeModel::class, 'users.id', '=', 'posts.user_id');
+```
+
+#### `outerJoin`
+
+Join another table with an outer join.
+
+Usage:
+
+```php
+(new User)->select('*')->outerJoin(SomeModel::class, 'users.id', '=', 'posts.user_id');
+```
+
+#### `raw`
+
+Add a raw SQL to the query.
+
+Usage:
+
+```php
+(new User)->select('*')->raw('WHERE id = ?', [1]);
+```
+
+#### `get`
+
+Get all the results.
+
+Usage:
+
+```php
+(new User)->select('*')->get();
+```
+
+#### `first`
+
+Get the first result.
+
+Usage:
+
+```php
+(new User)->select('*')->first();
+```
+
+#### `last`
+
+Get the last result.
+
+Usage:
+
+```php
+(new User)->select('*')->last();
+```
+
+## Creating
+
+To be written.
+
+## Updating
+
+To be written.
+
+## Deleting
 
 To be written.
