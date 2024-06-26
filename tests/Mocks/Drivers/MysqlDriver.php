@@ -15,6 +15,8 @@ class MysqlDriver implements ConnectionDriver
 
   public function execute(string $sql, array $params = []): bool
   {
+    file_put_contents(__DIR__ . '/../../.executed_log', serialize([$sql, $params]));
+
     return true;
   }
 

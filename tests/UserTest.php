@@ -62,6 +62,37 @@ class UserTest extends TestCase
     $this->assertEquals([], $query->data());
   }
 
+  public function testRawQuery(): void
+  {
+    $query = (new User)->query()->raw("SELECT * FROM users WHERE id = ?", [1]);
+
+    $this->assertEquals("SELECT * FROM users WHERE id = ?", $query->sql());
+    $this->assertEquals([1], $query->data());
+  }
+
+  public function testStore(): void
+  {
+    $user = new User;
+    $user->id = 1;
+    $user->name = "Test User";
+    $user->email = "test@test.com";
+    $user->store();
+
+    $this->assertFileExists(__DIR__ . '/.executed_log');
+    [$sql, $params] = unserialize(file_get_contents(__DIR__ . '/.executed_log'));
+    $this->assertEquals("UPDATE users SET id = ?,name = ?,email = ? WHERE id = ?", $sql);
+    $this->assertEquals([1, "Test User", "test@test.com", 1], $params);
+
+    unlink(__DIR__ . '/.executed_log');
+  }
+
+  public function testLast(): void
+  {
+    $query = (new User)->query()->select('*')->last();
+
+    $this->assertInstanceOf(User::class, $query);
+  }
+
   public function testModelCreation(): void
   {
     $query = (new User)->query()->select('*')->where("id", "=", 1);
