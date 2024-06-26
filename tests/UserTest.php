@@ -70,7 +70,7 @@ class UserTest extends TestCase
     $this->assertEquals([1], $query->data());
   }
 
-  public function testStore(): void
+  public function testUpdate(): void
   {
     $user = new User;
     $user->id = 1;
@@ -86,11 +86,51 @@ class UserTest extends TestCase
     unlink(__DIR__ . '/.executed_log');
   }
 
+  public function testInsert(): void
+  {
+    (new User)->query()->insert([
+      "id" => 1,
+      "name" => "Test User",
+      "email" => "test@user.com"
+    ]);
+
+    $this->assertFileExists(__DIR__ . '/.executed_log');
+    [$sql, $params] = unserialize(file_get_contents(__DIR__ . '/.executed_log'));
+    $this->assertEquals("INSERT INTO users (id,name,email) VALUES (?, ?, ?)", $sql);
+    $this->assertEquals([1, "Test User", "test@user.com"], $params);
+
+    unlink(__DIR__ . '/.executed_log');
+  }
+
+  public function testDelete(): void
+  {
+    $user = (new User)->find(1);
+    $user->delete();
+
+    $this->assertFileExists(__DIR__ . '/.executed_log');
+    [$sql, $params] = unserialize(file_get_contents(__DIR__ . '/.executed_log'));
+    $this->assertEquals("DELETE FROM users WHERE id = ?", $sql);
+    $this->assertEquals([1], $params);
+
+    unlink(__DIR__ . '/.executed_log');
+  }
+
+
   public function testLast(): void
   {
     $query = (new User)->query()->select('*')->last();
 
     $this->assertInstanceOf(User::class, $query);
+  }
+
+  public function testFind(): void
+  {
+    $user = (new User)->find(1);
+
+    $this->assertInstanceOf(User::class, $user);
+    $this->assertEquals(1, $user->id);
+    $this->assertEquals("John Doe", $user->name);
+    $this->assertEquals("john@doe.com", $user->email);
   }
 
   public function testModelCreation(): void
