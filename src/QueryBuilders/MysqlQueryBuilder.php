@@ -119,18 +119,17 @@ class MysqlQueryBuilder implements QueryBuilder
    * Example usage:
    *
    * ```
-   * $query->join(User::class, 'users.id', '=', 'posts.user_id');
+   * $query->join('users, 'users.id', '=', 'posts.user_id');
    * ```
    *
-   * @param class-string $model
+   * @param string $table
    * @param string $first
    * @param string $operator
    * @param string $second
    * @return static
    */
-  public function join(string $model, string $first, string $operator, string $second): static
+  public function join(string $table, string $first, string $operator, string $second): static
   {
-    $table = $model::$table;
     $this->sql .= " JOIN {$table} ON {$first} {$operator} {$second}";
 
     return $this;
@@ -140,18 +139,17 @@ class MysqlQueryBuilder implements QueryBuilder
    * Example usage:
    *
    * ```
-   * $query->leftJoin(User::class, 'users.id', '=', 'posts.user_id');
+   * $query->leftJoin('users', 'users.id', '=', 'posts.user_id');
    * ```
    *
-   * @param class-string $model
+   * @param string $table
    * @param string $first
    * @param string $operator
    * @param string $second
    * @return static
    */
-  public function leftJoin(string $model, string $first, string $operator, string $second): static
+  public function leftJoin(string $table, string $first, string $operator, string $second): static
   {
-    $table = $model::$table;
     $this->sql .= " LEFT JOIN {$table} ON {$first} {$operator} {$second}";
 
     return $this;
@@ -161,18 +159,17 @@ class MysqlQueryBuilder implements QueryBuilder
    * Example usage:
    *
    * ```
-   * $query->rightJoin(User::class, 'users.id', '=', 'posts.user_id');
+   * $query->rightJoin('users', 'users.id', '=', 'posts.user_id');
    * ```
    *
-   * @param class-string $model
+   * @param string $table
    * @param string $first
    * @param string $operator
    * @param string $second
    * @return static
    */
-  public function rightJoin(string $model, string $first, string $operator, string $second): static
+  public function rightJoin(string $table, string $first, string $operator, string $second): static
   {
-    $table = $model::$table;
     $this->sql .= " RIGHT JOIN {$table} ON {$first} {$operator} {$second}";
 
     return $this;
@@ -182,18 +179,17 @@ class MysqlQueryBuilder implements QueryBuilder
    * Example usage:
    *
    * ```
-   * $query->innerJoin(User::class, 'users.id', '=', 'posts.user_id');
+   * $query->innerJoin('users', 'users.id', '=', 'posts.user_id');
    * ```
    *
-   * @param class-string $model
+   * @param string $table
    * @param string $first
    * @param string $operator
    * @param string $second
    * @return static
    */
-  public function innerJoin(string $model, string $first, string $operator, string $second): static
+  public function innerJoin(string $table, string $first, string $operator, string $second): static
   {
-    $table = $model::$table;
     $this->sql .= " INNER JOIN {$table} ON {$first} {$operator} {$second}";
 
     return $this;
@@ -203,18 +199,17 @@ class MysqlQueryBuilder implements QueryBuilder
    * Example usage:
    *
    * ```
-   * $query->outerJoin(User::class, 'users.id', '=', 'posts.user_id');
+   * $query->outerJoin('users', 'users.id', '=', 'posts.user_id');
    * ```
    *
-   * @param string $model
+   * @param string $table
    * @param string $first
    * @param string $operator
    * @param string $second
    * @return static
    */
-  public function outerJoin(string $model, string $first, string $operator, string $second): static
+  public function outerJoin(string $table, string $first, string $operator, string $second): static
   {
-    $table = $model::$table;
     $this->sql .= " OUTER JOIN {$table} ON {$first} {$operator} {$second}";
 
     return $this;
