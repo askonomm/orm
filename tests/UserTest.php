@@ -33,14 +33,14 @@ class UserTest extends TestCase
 
   public function testFirst(): void
   {
-    $query = (new UserWithData)->query()->select('*')->first();
+    $query = (new UserWithData)->query()->first();
 
     $this->assertInstanceOf(UserWithData::class, $query);
   }
 
   public function testLast(): void
   {
-    $query = (new UserWithData)->query()->select('*')->last();
+    $query = (new UserWithData)->query()->last();
 
     $this->assertInstanceOf(UserWithData::class, $query);
   }
@@ -57,7 +57,7 @@ class UserTest extends TestCase
 
   public function testModelCreation(): void
   {
-    $query = (new UserWithData)->query()->select('*')->where("id", "=", 1);
+    $query = (new UserWithData)->query()->where("id", "=", 1);
     $user = $query->first();
 
     $this->assertInstanceOf(UserWithData::class, $user);

@@ -9,11 +9,6 @@ use Asko\Collection\Collection;
  */
 interface QueryBuilder
 {
-  /**
-   * @param string|array<string> $cols
-   */
-  public function select(string|array $cols): static;
-
   public function where(string $col, string $op = "=", mixed $value = null): static;
 
   public function andWhere(string $col, string $op = "=", mixed $value = null): static;

@@ -101,7 +101,6 @@ class BaseModel
   public function find(mixed $identifier): ?static
   {
     return self::query()
-      ->select('*')
       ->where(static::$_identifier, '=', $identifier)
       ->first();
   }
@@ -125,7 +124,7 @@ class BaseModel
     $id = $this->get(static::$_identifier);
 
     // If item by identifier exists, update
-    if ($query->select('*')->where(static::$_identifier, '=', $id)->first()) {
+    if ($query->where(static::$_identifier, '=', $id)->first()) {
       $query->update(static::$_identifier, $this->get());
       return;
     }

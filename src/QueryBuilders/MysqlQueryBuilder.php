@@ -23,16 +23,13 @@ class MysqlQueryBuilder implements QueryBuilder
   ) {
   }
 
-  /**
-   * @param string|string[] $cols 
-   * @return static 
-   */
-  public function select(string|array $cols): static
+  private function maybePrependSelect(): void
   {
-    $cols = is_array($cols) ? implode(",", $cols) : $cols;
-    $this->sql .= " SELECT {$cols} FROM {$this->table} ";
+    if (str_starts_with($this->sql, "SELECT")) {
+      return;
+    }
 
-    return $this;
+    $this->sql = "SELECT * FROM {$this->table} {$this->sql}";
   }
 
   /**
@@ -170,6 +167,8 @@ class MysqlQueryBuilder implements QueryBuilder
    */
   public function rightJoin(string $table, string $first, string $operator, string $second): static
   {
+    $this->maybePrependSelect();
+
     $this->sql .= " RIGHT JOIN {$table} ON {$first} {$operator} {$second}";
 
     return $this;
@@ -190,6 +189,8 @@ class MysqlQueryBuilder implements QueryBuilder
    */
   public function innerJoin(string $table, string $first, string $operator, string $second): static
   {
+    $this->maybePrependSelect();
+
     $this->sql .= " INNER JOIN {$table} ON {$first} {$operator} {$second}";
 
     return $this;
@@ -289,6 +290,8 @@ class MysqlQueryBuilder implements QueryBuilder
    */
   public function get(): Collection
   {
+    $this->maybePrependSelect();
+
     $result = $this->connection->fetch($this->sql(), $this->data());
 
     return new Collection(array_map(function ($row) {

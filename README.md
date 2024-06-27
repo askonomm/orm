@@ -74,7 +74,6 @@ An example query looks like this:
 ```php
 $user = (new User)
   ->query()
-  ->select('*')
   ->where('id', '=', 1)
   ->first();
 ```
@@ -85,21 +84,7 @@ Although because we use the primary key identifier to search for the user, the a
 $user = (new User)->find(1);
 ```
 
-### All methods
-
-#### `select`
-
-Select the columns you want to retrieve from the table.
-
-Usage:
-
-```php
-(new User)->select('*');
-// or
-(new User)->select(['id', 'email']);
-```
-
-Note that every query must start with the `select` method.
+### All query methods
 
 #### `where`
 
@@ -108,9 +93,9 @@ Where clause to filter the results.
 Usage:
 
 ```php
-(new User)->select('*')->where('id', '=', 1);
+(new User)->query()->where('id', '=', 1);
 // or
-(new User)->select('*')->where('id', '>', 1);
+(new User)->query()->where('id', '>', 1);
 ```
 
 #### `andWhere`
@@ -120,7 +105,7 @@ Same as `where` but with `AND` operator.
 Usage:
 
 ```php
-(new User)->select('*')->where('id', '=', 1)->andWhere('email', '=', 'john@smith.com');
+(new User)->query()->where('id', '=', 1)->andWhere('email', '=', 'john@smith.com');
 ```
 
 #### `orWhere`
@@ -130,7 +115,7 @@ Same as `where` but with `OR` operator.
 Usage:
 
 ```php
-(new User)->select('*')->where('id', '=', 1)->orWhere('email', '=', 'john@smith.com');
+(new User)->query()->where('id', '=', 1)->orWhere('email', '=', 'john@smith.com');
 ```
 
 #### `orderBy`
@@ -140,7 +125,7 @@ Order the results by a column.
 Usage:
 
 ```php
-(new User)->select('*')->orderBy('id', 'asc');
+(new User)->query()->orderBy('id', 'asc');
 ```
 
 #### `limit`
@@ -150,7 +135,7 @@ Limit the number of results.
 Usage:
 
 ```php
-(new User)->select('*')->limit(10);
+(new User)->query()->limit(10);
 ```
 
 #### `offset`
@@ -160,7 +145,7 @@ Offset the results.
 Usage:
 
 ```php
-(new User)->select('*')->offset(10);
+(new User)->query()->offset(10);
 ```
 
 #### `join`
@@ -170,7 +155,7 @@ Join another table.
 Usage:
 
 ```php
-(new User)->select('*')->join(SomeModel::class, 'users.id', '=', 'posts.user_id');
+(new User)->query()->join(SomeModel::class, 'users.id', '=', 'posts.user_id');
 ```
 
 #### `leftJoin`
@@ -180,7 +165,7 @@ Join another table with a left join.
 Usage:
 
 ```php
-(new User)->select('*')->leftJoin(SomeModel::class, 'users.id', '=', 'posts.user_id');
+(new User)->query()->leftJoin(SomeModel::class, 'users.id', '=', 'posts.user_id');
 ```
 
 #### `rightJoin`
@@ -190,7 +175,7 @@ Join another table with a right join.
 Usage:
 
 ```php
-(new User)->select('*')->rightJoin(SomeModel::class, 'users.id', '=', 'posts.user_id');
+(new User)->query()->rightJoin(SomeModel::class, 'users.id', '=', 'posts.user_id');
 ```
 
 #### `innerJoin`
@@ -200,7 +185,7 @@ Join another table with an inner join.
 Usage:
 
 ```php
-(new User)->select('*')->innerJoin(SomeModel::class, 'users.id', '=', 'posts.user_id');
+(new User)->query()->innerJoin(SomeModel::class, 'users.id', '=', 'posts.user_id');
 ```
 
 #### `outerJoin`
@@ -210,7 +195,7 @@ Join another table with an outer join.
 Usage:
 
 ```php
-(new User)->select('*')->outerJoin(SomeModel::class, 'users.id', '=', 'posts.user_id');
+(new User)->query()->outerJoin(SomeModel::class, 'users.id', '=', 'posts.user_id');
 ```
 
 #### `raw`
@@ -220,7 +205,7 @@ Add a raw SQL to the query.
 Usage:
 
 ```php
-(new User)->select('*')->raw('WHERE id = ?', [1]);
+(new User)->query()->raw('WHERE id = ?', [1]);
 ```
 
 #### `get`
@@ -230,7 +215,7 @@ Get all the results.
 Usage:
 
 ```php
-(new User)->select('*')->get();
+(new User)->query()->get();
 ```
 
 #### `first`
@@ -240,7 +225,7 @@ Get the first result.
 Usage:
 
 ```php
-(new User)->select('*')->first();
+(new User)->query()->first();
 ```
 
 #### `last`
@@ -250,7 +235,7 @@ Get the last result.
 Usage:
 
 ```php
-(new User)->select('*')->last();
+(new User)->query()->last();
 ```
 
 ## Creating
