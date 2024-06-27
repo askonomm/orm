@@ -14,6 +14,22 @@ class UserTest extends TestCase
     error_reporting(E_ALL);
   }
 
+  public function testGet(): void
+  {
+    $user = new User;
+    $user->id = 1;
+
+    $this->assertEquals(1, $user->get('id'));
+  }
+
+  public function testSet(): void
+  {
+    $user = new User;
+    $user->set('id', 1);
+
+    $this->assertEquals(1, $user->id);
+  }
+
   public function testFirst(): void
   {
     $query = (new User)->query()->select('*')->first();
