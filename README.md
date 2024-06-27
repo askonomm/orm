@@ -155,7 +155,7 @@ Join another table.
 Usage:
 
 ```php
-(new User)->query()->join(SomeModel::class, 'users.id', '=', 'posts.user_id');
+(new User)->query()->join('posts', 'posts.user_id', '=', 'users.id');
 ```
 
 #### `leftJoin`
@@ -165,7 +165,7 @@ Join another table with a left join.
 Usage:
 
 ```php
-(new User)->query()->leftJoin(SomeModel::class, 'users.id', '=', 'posts.user_id');
+(new User)->query()->leftJoin('posts', 'posts.user_id', '=', 'users.id');
 ```
 
 #### `rightJoin`
@@ -175,7 +175,7 @@ Join another table with a right join.
 Usage:
 
 ```php
-(new User)->query()->rightJoin(SomeModel::class, 'users.id', '=', 'posts.user_id');
+(new User)->query()->rightJoin('posts', 'posts.user_id', '=', 'users.id');
 ```
 
 #### `innerJoin`
@@ -185,7 +185,7 @@ Join another table with an inner join.
 Usage:
 
 ```php
-(new User)->query()->innerJoin(SomeModel::class, 'users.id', '=', 'posts.user_id');
+(new User)->query()->innerJoin('posts', 'posts.user_id', '=', 'users.id');
 ```
 
 #### `outerJoin`
@@ -195,7 +195,7 @@ Join another table with an outer join.
 Usage:
 
 ```php
-(new User)->query()->outerJoin(SomeModel::class, 'users.id', '=', 'posts.user_id');
+(new User)->query()->outerJoin('posts', 'posts.user_id', '=', 'users.id');
 ```
 
 #### `raw`
