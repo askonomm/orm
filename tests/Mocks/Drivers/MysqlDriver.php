@@ -8,9 +8,8 @@ use Asko\Orm\QueryBuilder;
 
 class MysqlDriver implements ConnectionDriver
 {
-  public function __construct()
+  public function __construct(private readonly bool $has_data)
   {
-    // Do nothing, this is a mock.
   }
 
   public function execute(string $sql, array $params = []): bool
@@ -22,6 +21,10 @@ class MysqlDriver implements ConnectionDriver
 
   public function fetch(string $sql, array $params = [], int $mode = \PDO::FETCH_ASSOC): array
   {
+    if (!$this->has_data) {
+      return [];
+    }
+
     return [
       [
         "id" => 1,

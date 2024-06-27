@@ -7,9 +7,9 @@ namespace Asko\Orm\Tests\Models;
 use Asko\Orm\Column;
 
 /**
- * @extends Model<User>
+ * @extends ModelWithoutData<UserWithoutData>
  */
-class User extends Model
+class UserWithoutData extends ModelWithoutData
 {
   protected static string $_table = "users";
   protected static string $_identifier = "id";

@@ -11,10 +11,10 @@ use Asko\Orm\Tests\Mocks\Drivers\MysqlDriver;
  * @template T
  * @extends BaseModel<T>
  */
-class Model extends BaseModel
+class ModelWithoutData extends BaseModel
 {
   public function __construct()
   {
-    parent::__construct(new MysqlDriver());
+    parent::__construct(new MysqlDriver(has_data: false));
   }
 }

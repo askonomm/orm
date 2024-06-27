@@ -1,6 +1,6 @@
 <?php
 
-use Asko\Orm\Tests\Models\User;
+use Asko\Orm\Tests\Models\UserWithData as User;
 use PHPUnit\Framework\TestCase;
 
 class MysqlQueryBuilderTest extends TestCase
@@ -63,11 +63,11 @@ class MysqlQueryBuilderTest extends TestCase
 
   public function testUpdate(): void
   {
-    $user = new User;
-    $user->id = 1;
-    $user->name = "Test User";
-    $user->email = "test@test.com";
-    $user->store();
+    (new User)->query()->update("id", [
+      "id" => 1,
+      "name" => "Test User",
+      "email" => "test@test.com"
+    ]);
 
     $this->assertFileExists(__DIR__ . '/../.executed_log');
     [$sql, $params] = unserialize(file_get_contents(__DIR__ . '/../.executed_log'));
