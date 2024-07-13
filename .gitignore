@@ -2,3 +2,7 @@
 /phpunit.xml.bak
 /.phpunit.result.cache
 /.phpunit.cache
+/.idea
+/.DS_Store
+/.vscode
+/tests/.executed_log

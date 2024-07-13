@@ -25,7 +25,8 @@
   "require": {
     "php": ">=8.2",
     "crell/fp": "^1.0",
-    "asko/collection": "^1.0"
+    "asko/collection": "^1.0",
+    "ext-pdo": "*"
   },
   "require-dev": {
     "phpunit/phpunit": "^11",
