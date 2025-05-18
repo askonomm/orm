@@ -1,6 +1,6 @@
 {
   "name": "asko/orm",
-  "description": "",
+  "description": "A object relational mapper with a query builder and out of box support for MySQL databases.",
   "type": "library",
   "license": "MIT",
   "autoload": {
@@ -19,11 +19,11 @@
   "authors": [
     {
       "name": "Asko Nõmm",
-      "email": "asko@nth.ee"
+      "email": "asko@nmm.ee"
     }
   ],
   "require": {
-    "php": ">=8.2",
+    "php": ">=8.4",
     "crell/fp": "^1.0",
     "asko/collection": "^1.0",
     "ext-pdo": "*"

@@ -46,7 +46,7 @@ class BaseModel
      * @return mixed
      * @throws \ReflectionException
      */
-    public function get(string $key = null, mixed $default = null): mixed
+    public function get(?string $key = null, mixed $default = null): mixed
     {
         if (is_null($key) && is_null($default)) {
             $vars = get_object_vars($this);
